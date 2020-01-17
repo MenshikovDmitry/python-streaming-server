@@ -18,7 +18,12 @@ class Connection(object):
 
 
     def connect(self):
-        self.connection = cv2.VideoCapture(self.url)
+        camera_string=self.url
+        if camera_string in "0123":
+            #if we use '0' or '1' or etc for USB cameras,
+            #it is needed to convert them to int
+            camera_string=int(camera_string)
+        self.connection = cv2.VideoCapture(camera_string)
         return self.connection
 
     def addConnection(self, client):
